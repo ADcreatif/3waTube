@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><?= $page ?></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+    <!-- appels CSS -->
+    <link href="www/css/normalize.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="www/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+<header>
+    <a href="index.php" id="logo"></a>
+    <nav class="flex">
+        <a href="index.php">Accueil</a>
+        <a href="#" title="">insolite</a>
+        <a href="#" title="">a propos</a>
+        <a href="#" title="">Contact</a>
+    </nav>
+</header>
+
+<main class="flex container">
+
+    <!-- inclusion du template <?= $page ?>.phtml -->
+    <?php include "www/$page.phtml"; ?>
+    <!-- fin du template <?= $page ?>.phtml-->
+
+</main>
+
+<footer>
+
+</footer>
+</body>
+</html>
+
+
+
+

@@ -1,0 +1,25 @@
+<section>
+    <h2>Les derniers ajouts</h2>
+    <ul class="list">
+        <?php foreach ($videos as $video): ?>
+            <li>
+                <a href="index.php?page=video&id=<?= $video['id'] ?>" title="<?= $video['title'] ?>">
+                    <?= $video['title'] ?>
+                </a>
+            </li>
+        <?php endforeach ?>
+    </ul>
+</section>
+
+<section>
+    <h2>Les mieux notées</h2>
+    <ul class="list">
+        <?php foreach ($videos as $video): ?>
+            <li>
+                <a href="index.php?page=video&id=<?= $video['id'] ?>" title="<?= $video['title'] ?>">
+                    <?= $video['title'] ?>
+                </a>
+            </li>
+        <?php endforeach ?>
+    </ul>
+</section>
