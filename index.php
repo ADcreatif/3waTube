@@ -1,7 +1,5 @@
 <?php
 include "config.php";
-include "datas.php";
-
 
 /////////////////// FRONT CONTROLLER /////////////////////////
 // C'est l'entité responsable du choix des pages a afficher //
