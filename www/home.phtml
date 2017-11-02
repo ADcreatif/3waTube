@@ -1,23 +1,23 @@
-<section>
+<section class="bloc">
     <h2>Les derniers ajouts<i class="icon add push-right"></i></h2>
     <ul class="list">
         <?php foreach ($videos as $video): ?>
             <li>
-                <a href="index.php?page=video&id=<?= $video['id'] ?>" title="<?= $video['title'] ?>">
-                    <?= $video['title'] ?>
+                <a href="index.php?page=video&id=<?= $video->reference ?>" title="<?= $video->title ?>">
+                    <?= $video->title ?>
                 </a>
             </li>
         <?php endforeach ?>
     </ul>
 </section>
 
-<section>
+<section class="bloc">
     <h2>Les mieux notées<i class="icon star push-right"></i></h2>
     <ul class="list">
         <?php foreach ($videos as $video): ?>
             <li>
-                <a href="index.php?page=video&id=<?= $video['id'] ?>" title="<?= $video['title'] ?>">
-                    <?= $video['title'] ?>
+                <a href="index.php?page=video&id=<?= $video->reference ?>" title="<?= $video->title ?>">
+                    <?= $video->title ?>
                 </a>
             </li>
         <?php endforeach ?>

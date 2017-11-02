@@ -31,7 +31,7 @@ header {
 #logo {
     display: block;
     background-image: url(../images/tileset.png);
-    height: 121px;
+    height: 120px;
     width: 550px;
     margin: 25px 50px;
 }
@@ -70,6 +70,7 @@ nav a:hover {
 .flex {
     display: flex;
     justify-content: flex-start;
+    flex-wrap: wrap;
 }
 
 .flex > * {
@@ -81,6 +82,9 @@ nav a:hover {
     float: right
 }
 
+.flex h1, .flex h2, .flex h3 {
+    flex-basis: 100%;
+}
 /**************************          ICONS            ***********************/
 .icon {
     display: inline-block;
@@ -106,14 +110,17 @@ nav a:hover {
     border-radius: 5px;
 }
 
-main section {
-    width: 50%;
-    margin: 20px;
+.bloc {
+    width: 48%;
     border: 3px solid red;
     border-radius: 5px;
 }
 
-main section h2 {
+.bloc + .bloc {
+    margin-left: 4%;
+}
+
+.bloc h2 {
     padding: 20px 25px;
     background-color: red;
     margin: 0;
@@ -159,4 +166,21 @@ main section h2 {
 
 .list a:hover:after {
     box-shadow: inset -50px 0 40px rgba(255, 0, 0, 1);
+}
+
+/**************************          MAIN            ***********************/
+#player.full-width {
+    box-sizing: border-box;
+    width: 100%;
+    height: calc((9 / 16) * 100vw);
+    max-height: calc(100vh - 185px);
+}
+
+#player.large {
+}
+
+#player.small {
+}
+
+#player.medium {
 }
