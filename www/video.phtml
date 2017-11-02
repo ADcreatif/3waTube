@@ -11,4 +11,7 @@
             frameborder="0"
             allowfullscreen>
     </iframe>
+    <p><?= nl2br($video->description) ?></p>
+    <p><img src="<?= $video->thumbnails['default']['url'] ?>" ?></p>
 <?php endif ?>
+

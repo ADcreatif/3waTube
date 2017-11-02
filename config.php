@@ -1,12 +1,22 @@
 <?php
-//                  localhost/                        3watune/(index.php)  ==> localhost/3watune
+
+
+// URL
 define('ROOT', $_SERVER['SERVER_NAME'] . str_replace('index.php', '', $_SERVER['SCRIPT_NAME']));
+
+// database
 define('DB_NAME', '3watube');
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
 define('DB_PASS', '');
 
+// api youtube
+define('OAUTH2_CLIENT_ID', '56794647177-55guh7lv7uf7p8ndslgnnih3qfvpn9ni.apps.googleusercontent.com');
+define('OAUTH2_CLIENT_SECRET', '7D9QbRhTYkqy7Wr4CoiiNWvW');
+
+// mode debug
 define('DEBUG_MODE', true);
+
 
 if (DEBUG_MODE == false) {
     ini_set('display_errors', 0);
@@ -22,3 +32,9 @@ spl_autoload_register(function ($className) {
     else
         include "application/classes/$className.php";
 });
+
+
+require("vendor/autoload.php");
+
+
+session_start();
