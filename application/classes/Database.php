@@ -18,6 +18,12 @@ class Database {
         return $this->pdo->lastInsertId();
     }
 
+    function fetchColumn($sql, array $arguments = []) {
+        $query = $this->pdo->prepare($sql);
+        $query->execute($arguments);
+        return $query->fetchColumn();
+    }
+
     function fetchOne($sql, array $arguments = [], $fetchType = PDO::FETCH_OBJ) {
         $query = $this->pdo->prepare($sql);
         $query->execute($arguments);

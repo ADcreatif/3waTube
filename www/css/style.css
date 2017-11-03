@@ -184,3 +184,8 @@ nav a:hover {
 
 #player.medium {
 }
+
+#video #description {
+    height: 20em;
+    overflow-y: auto;
+}

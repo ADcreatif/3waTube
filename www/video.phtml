@@ -3,19 +3,38 @@
 <?php if (!empty($message)): ?>
     <p class="message"><?= $message ?></p>
 <?php else : ?>
-    <h1><?= $video->title ?></h1>
-    <iframe
-            id="player"
-            class="<?= $video->format ?>"
-            width="<?= $video->width ?>"
-            height="<?= $video->height ?>"
-            src="https://www.youtube.com/embed/<?= $video->reference ?><?= $video->options ?>"
-            frameborder="0"
-            allowfullscreen>
-    </iframe>
-    <p>note : <?= $video->rate ?></p>
-    <p><?= nl2br($video->description) ?></p>
-    <p><img src="<?= $video->thumbnail ?>" ?></p>
-
+    <div id="video" class="flex">
+        <h1><?= $video->title ?></h1>
+        <iframe
+                id="player"
+                class="<?= $video->format ?>"
+                width="<?= $video->width ?>"
+                height="<?= $video->height ?>"
+                src="https://www.youtube.com/embed/<?= $video->reference ?><?= $video->options ?>"
+                frameborder="0"
+                allowfullscreen>
+        </iframe>
+        <p>note : <span id="rate-value"><?= number_format($video->rate, 1) ?></span></p>
+        <p id="rating" class="flex">
+            <?php for ($star = 1; $star <= 5; $star++): ?>
+                <?php $filled = $star <= round($video->rate) ? 'fa-star' : 'fa-star-o'; ?>
+                <a href="#" data-rate="<?= $star ?>"><i class="fa <?= $filled ?>"></i></a>
+            <?php endfor ?>
+        </p>
+        <p id="description"><?= nl2br($video->description) ?></p>
+        <p><img src="<?= $video->thumbnail->default->url ?>" ?></p>
+    </div>
 
 <?php endif ?>
+
+<script>
+    $(function () {  // chargmement du dom
+        $('#rating').children('a').click(function () { //détection du click sur les étoiles
+            $.get('', 'vote=' + $(this).data('rate'),
+                function (newRate) {
+                    $('#rate-value').text((Math.round(newRate * 10) / 10).toFixed(1));
+                });
+            return false; //(event.preventDefault)
+        });
+    })
+</script>
