@@ -60,13 +60,23 @@ class VideoModel {
     function getVideo() {
 
         $db = new Database();
-        $video = $db->fetchOne("SELECT title FROM videos WHERE reference = ?", [$this->reference]);
+
+        $sql = "
+            SELECT title, AVG(rate) AS rate
+            FROM ratings
+            JOIN videos ON videos.id = videos_id
+            WHERE reference = ?
+            GROUP BY title
+        ";
+
+        $video = $db->fetchOne($sql, [$this->reference]);
 
         if (empty($video))
             throw new DomainException('La video est introuvable');
 
         // on défini les propriétés
         $this->title = $video->title;
+        $this->rate = $video->rate;
     }
 
     /**
@@ -75,11 +85,13 @@ class VideoModel {
      * @param int $amount
      * @return array
      */
-    static function getAllVideos($amount = 6) {
+    static function getAllVideos($amount = null) {
+
+        $amount = $amount ? " LIMIT $amount " : '';
 
         $db = new Database();
 
-        return $db->fetchAll("SELECT reference, title FROM videos ORDER BY id DESC LIMIT $amount");
+        return $db->fetchAll("SELECT reference, title FROM videos ORDER BY id DESC $amount");
 
     }
 }

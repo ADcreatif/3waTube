@@ -10,13 +10,12 @@ define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
 define('DB_PASS', '');
 
-// api youtube
-define('OAUTH2_CLIENT_ID', '56794647177-55guh7lv7uf7p8ndslgnnih3qfvpn9ni.apps.googleusercontent.com');
-define('OAUTH2_CLIENT_SECRET', '7D9QbRhTYkqy7Wr4CoiiNWvW');
 
 // mode debug
 define('DEBUG_MODE', true);
 
+// youtube
+define('YOUTUBE_API_KEY', 'AIzaSyDS1xOilF31J3yXKBwHoc4EoUn5aJCZnJw');
 
 if (DEBUG_MODE == false) {
     ini_set('display_errors', 0);

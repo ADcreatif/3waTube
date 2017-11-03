@@ -1,4 +1,4 @@
 <?php
 
 // Appel de la méthode statique getAllVideos()
-$videos = VideoModel::getAllVideos(6);
+$videos = VideoModel::getAllVideos();

@@ -3,12 +3,18 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Jeu 02 Novembre 2017 à 14:39
+-- Généré le :  Ven 03 Novembre 2017 à 12:02
 -- Version du serveur :  5.7.14
 -- Version de PHP :  5.6.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT = @@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS = @@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION = @@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Base de données :  `3watube`
@@ -17,16 +23,39 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `ratings`
+--
+
+CREATE TABLE `ratings` (
+  `id`        INT(10) UNSIGNED NOT NULL,
+  `videos_id` INT(10) UNSIGNED NOT NULL,
+  `rate`      INT(1) UNSIGNED  NOT NULL,
+  `user_id`   INT(10) UNSIGNED NOT NULL
+)
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
+
+--
+-- Contenu de la table `ratings`
+--
+
+INSERT INTO `ratings` (`id`, `videos_id`, `rate`, `user_id`) VALUES
+  (1, 1, 5, 1),
+  (2, 1, 1, 2),
+  (4, 1, 4, 3);
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `videos`
 --
 
-DROP TABLE IF EXISTS `videos`;
 CREATE TABLE `videos` (
-  `id`        INT(11)      NOT NULL,
-  `reference` CHAR(11)     NOT NULL,
-  `title`     VARCHAR(100) NOT NULL
+  `id`        INT(11) UNSIGNED NOT NULL,
+  `reference` CHAR(11)         NOT NULL,
+  `title`     VARCHAR(100)     NOT NULL
 )
-  ENGINE = MyISAM
+  ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
 --
@@ -51,6 +80,13 @@ INSERT INTO `videos` (`id`, `reference`, `title`) VALUES
 --
 
 --
+-- Index pour la table `ratings`
+--
+ALTER TABLE `ratings`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `videos_id` (`videos_id`, `user_id`) USING BTREE;
+
+--
 -- Index pour la table `videos`
 --
 ALTER TABLE `videos`
@@ -64,8 +100,29 @@ ALTER TABLE `videos`
 --
 
 --
+-- AUTO_INCREMENT pour la table `ratings`
+--
+ALTER TABLE `ratings`
+  MODIFY `id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  AUTO_INCREMENT = 5;
+--
 -- AUTO_INCREMENT pour la table `videos`
 --
 ALTER TABLE `videos`
-  MODIFY `id` INT(11) NOT NULL AUTO_INCREMENT,
+  MODIFY `id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   AUTO_INCREMENT = 12;
+--
+-- Contraintes pour les tables exportées
+--
+
+--
+-- Contraintes pour la table `ratings`
+--
+ALTER TABLE `ratings`
+  ADD CONSTRAINT `ratings_ibfk_1` FOREIGN KEY (`videos_id`) REFERENCES `videos` (`id`)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE;
+
+/*!40101 SET CHARACTER_SET_CLIENT = @OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS = @OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION = @OLD_COLLATION_CONNECTION */;
