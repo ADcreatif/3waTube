@@ -10,12 +10,12 @@ define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
 define('DB_PASS', '');
 
+// youtube
+define('YOUTUBE_API_KEY', 'AIzaSyDS1xOilF31J3yXKBwHoc4EoUn5aJCZnJw');
 
 // mode debug
 define('DEBUG_MODE', true);
 
-// youtube
-define('YOUTUBE_API_KEY', 'AIzaSyDS1xOilF31J3yXKBwHoc4EoUn5aJCZnJw');
 
 if (DEBUG_MODE == false) {
     ini_set('display_errors', 0);

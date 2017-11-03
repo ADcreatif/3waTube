@@ -1,24 +1,8 @@
-<?php if (DEBUG_MODE)var_dump($video) ?>
+<?php /*var_dump($video) */ ?>
 
 <?php if (!empty($message)): ?>
     <p class="message"><?= $message ?></p>
 <?php else : ?>
-    <?php /*
-    <h1><?= $video->snippet->title ?></h1>
-    <iframe
-            id="player"
-            class="<?= $video->format ?>"
-            width="<?= $video->width ?>"
-            height="<?= $video->height ?>"
-            src="https://www.youtube.com/embed/<?= $video->id ?><?= $video->options ?>"
-            frameborder="0"
-            allowfullscreen>
-    </iframe>
-    <p><?= nl2br($video->snippet->description) ?></p>
-    <p><img src="<?= $video->snippet->thumbnails['default']['url'] ?>" ?></p>
-
-*/ ?>
-
     <h1><?= $video->title ?></h1>
     <iframe
             id="player"
@@ -29,6 +13,9 @@
             frameborder="0"
             allowfullscreen>
     </iframe>
+    <p>note : <?= $video->rate ?></p>
+    <p><?= nl2br($video->description) ?></p>
+    <p><img src="<?= $video->thumbnail ?>" ?></p>
 
 
 <?php endif ?>

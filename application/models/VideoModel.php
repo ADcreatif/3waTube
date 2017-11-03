@@ -9,10 +9,13 @@ class VideoModel {
 
     public $reference;
     public $title;
+    public $description;
+    public $thumbnail;
     public $width;
     public $height;
     public $options;
     public $format;
+    public $rate;
 
     function __construct($reference) {
         $this->reference = $reference;
@@ -59,6 +62,7 @@ class VideoModel {
 
     function getVideo() {
 
+        // récupération des via la db
         $db = new Database();
 
         $sql = "
@@ -74,9 +78,30 @@ class VideoModel {
         if (empty($video))
             throw new DomainException('La video est introuvable');
 
+        // récupération des infos via l'API
+        $video_api = $this->get_video_from_api($this->reference);
+
+
         // on défini les propriétés
-        $this->title = $video->title;
+        $this->title = $video_api->snippet->title;
+        $this->description = $video_api->snippet->description;
+        $this->thumbnail = $video_api->snippet->thumbnails['default']['url'];
         $this->rate = $video->rate;
+    }
+
+    function get_video_from_api($reference) {
+
+        $client = new Google_Client();
+        $client->setDeveloperKey(YOUTUBE_API_KEY);
+
+        // Define an object that will be used to make all API requests.
+        $youtube = new Google_Service_YouTube($client);
+
+        $videos = $youtube->videos->listVideos("snippet", [
+            'id' => $reference
+        ]);
+
+        return $videos['items'][0];
     }
 
     /**
@@ -94,4 +119,5 @@ class VideoModel {
         return $db->fetchAll("SELECT reference, title FROM videos ORDER BY id DESC $amount");
 
     }
+
 }
