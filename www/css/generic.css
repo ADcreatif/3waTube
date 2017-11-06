@@ -1,0 +1,95 @@
+html {
+    font-size: 62.5%
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.6rem;
+    color: #222;
+
+    border-radius: 5px;
+}
+
+a {
+    transition: background-color .5s, color .5s;
+    text-decoration: none;
+    color: #333;
+}
+
+h1 {
+    padding: 25px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+/**************************          GENERIC CLASSES            ***********************/
+
+.container {
+    width: 90%;
+    margin: 25px auto;
+    max-width: 1200px;
+}
+
+.flex {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+
+.flex > * {
+    box-sizing: border-box;
+}
+
+.push-right {
+    float: right
+}
+
+.flex h1, .flex h2, .flex h3 {
+    flex-basis: 100%;
+}
+
+.align-right {
+    text-align: right
+}
+
+/**************************          ICONS            ***********************/
+.icon {
+    display: inline-block;
+    background: url(../images/icons-sprite.png) no-repeat;
+    width: 30px;
+    height: 30px;
+    vertical-align: middle;
+}
+
+.icon.small {
+    transform: scale(.7);
+}
+
+.icon.home {
+    background-position: 0 0;
+}
+
+.icon.insolite {
+    background-position: -30px 0;
+}
+
+.icon.about {
+    background-position: -60px 0;
+}
+
+.icon.contact {
+    background-position: -90px 0;
+}
+
+.icon.add, .icon.plus {
+    background-position: -120px 0;
+}
+
+.icon.star, .icon.rating {
+    background-position: -150px 0;
+}
+

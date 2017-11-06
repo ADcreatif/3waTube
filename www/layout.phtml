@@ -9,21 +9,24 @@
     <!-- appels CSS -->
     <link href="www/css/normalize.css" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="www/css/generic.css" rel="stylesheet">
     <link href="www/css/style.css" rel="stylesheet">
 
     <script src="www/js/jquery-3.2.1.min.js"></script>
+    <script src="www/js/script.js"></script>
 </head>
 
 <body>
 <header>
-    <a href="index.php" id="logo"></a>
-    <nav class="flex">
-        <a href="index.php">Accueil</a>
-        <a href="#" title="">insolite</a>
-        <a href="#" title="">a propos</a>
-        <a href="#" title="">Contact</a>
-    </nav>
 </header>
+
+<div id="logo"><a href="index.php"></a></div>
+<nav id="main-nav" class="flex">
+    <a href="index.php"><i class="icon small home"></i>Accueil</a>
+    <a href="#" title=""><i class="icon small insolite"></i>insolite</a>
+    <a href="#" title=""><i class="icon small about"></i>a propos</a>
+    <a href="#" title=""><i class="icon small contact"></i>Contact</a>
+</nav>
 
 <main class="flex container">
     <!-- inclusion du template <?= $page ?>.phtml -->

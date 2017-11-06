@@ -1,5 +1,3 @@
-<?php /*var_dump($video) */ ?>
-
 <?php if (!empty($message)): ?>
     <p class="message"><?= $message ?></p>
 <?php else : ?>
@@ -27,14 +25,4 @@
 
 <?php endif ?>
 
-<script>
-    $(function () {  // chargmement du dom
-        $('#rating').children('a').click(function () { //détection du click sur les étoiles
-            $.get('', 'vote=' + $(this).data('rate'),
-                function (newRate) {
-                    $('#rate-value').text((Math.round(newRate * 10) / 10).toFixed(1));
-                });
-            return false; //(event.preventDefault)
-        });
-    })
-</script>
+<script src="www/js/Rating.class.js"></script>

@@ -25,6 +25,5 @@ if (file_exists("application/controllers/$page.controller.php")) {
     include "application/controllers/$page.controller.php";
 }
 
-
 // chargement des vues
 include "www/layout.phtml";

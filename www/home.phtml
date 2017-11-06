@@ -1,10 +1,11 @@
 <section class="bloc">
     <h2>Les derniers ajouts<i class="icon add push-right"></i></h2>
     <ul class="list">
-        <?php foreach ($videos as $video): ?>
+        <?php foreach ($videosByAge as $video): ?>
             <li>
                 <a href="index.php?page=video&id=<?= $video->reference ?>" title="<?= $video->title ?>">
-                    <?= $video->title ?>
+                    <img src="<?= VideoModel::get_static_thumbnail_url($video->reference) ?>">
+                    <strong><?= $video->title ?></strong>
                 </a>
             </li>
         <?php endforeach ?>
@@ -14,10 +15,12 @@
 <section class="bloc">
     <h2>Les mieux notées<i class="icon star push-right"></i></h2>
     <ul class="list">
-        <?php foreach ($videos as $video): ?>
+        <?php foreach ($videosByRating as $video): ?>
             <li>
                 <a href="index.php?page=video&id=<?= $video->reference ?>" title="<?= $video->title ?>">
-                    <?= $video->title ?>
+                    <img src="<?= VideoModel::get_static_thumbnail_url($video->reference) ?>">
+                    <strong><?= $video->title ?></strong>
+                    <span><?= number_format($video->rating, 1) ?></span>
                 </a>
             </li>
         <?php endforeach ?>

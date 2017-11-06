@@ -63,14 +63,6 @@ class VideoModel {
         // récupération des via la db
         $db = new Database();
 
-        /* $sql = "
-             SELECT videos.id as id, title, AVG(rate) AS rate
-             FROM videos
-             JOIN ratings ON videos.id = videos_id
-             WHERE reference = ?
-             GROUP BY title, videos.id
-         ";*/
-
         $this->id = $db->fetchColumn('SELECT id FROM videos WHERE reference = ?', [$this->reference]);
         $this->rate = $this->get_rate();
 
@@ -79,15 +71,14 @@ class VideoModel {
         if ($this->id == null)
             throw new DomainException('La video est introuvable');
 
-
         // récupération des infos via l'API
-        $video_api = $this->get_video_from_api($this->reference);
-
+        $video = $this->get_video_from_api($this->reference);;
 
         // on défini les propriétés
-        $this->title = $video_api->snippet->title;
-        $this->description = $video_api->snippet->description;
-        $this->thumbnail = $video_api->snippet->thumbnails;
+        $this->title = $video->snippet->title;
+        $this->description = $video->snippet->description;
+        $this->thumbnail = $video->snippet->thumbnails;
+
     }
 
     function get_rate() {
@@ -107,6 +98,7 @@ class VideoModel {
             'id' => $reference
         ]);
 
+
         return $videos['items'][0];
     }
 
@@ -114,16 +106,42 @@ class VideoModel {
      * Cette fonction peut être appelée de n'importe ou sans avoir à instancier
      * la classe VideoModel
      * @param int $amount
+     * @param string $order_by [rating, videos_id,...]
      * @return array
      */
-    static function getAllVideos($amount = null) {
+    static function getAllVideos($amount = null, $order_by = null) {
 
         $amount = $amount ? " LIMIT $amount " : '';
+        $order_by = $order_by ? " ORDER BY $order_by DESC " : ' ORDER BY videos_id DESC ';
 
         $db = new Database();
 
-        return $db->fetchAll("SELECT reference, title FROM videos ORDER BY id DESC $amount");
+        /*
+         *  on fait une selection optionnelle avec les arguments transmi à la fonction
+         *  la fonction IFNULL() de mysql permet de retourne une veleur par défaut
+         *  si aucun résultat n'est trouvé dans la requête
+         */
 
+        return $db->fetchAll("
+            SELECT reference, title, IFNULL(AVG(rate) , 2.5) AS rating
+            FROM videos
+                LEFT JOIN ratings ON videos.id = videos_id
+            GROUP BY videos.id
+            $order_by $amount
+            ");
+    }
+
+    static function get_static_thumbnail_url($reference) {
+        $client = new Google_Client();
+        $client->setDeveloperKey(YOUTUBE_API_KEY);
+
+        // Define an object that will be used to make all API requests.
+        $youtube = new Google_Service_YouTube($client);
+
+        $videos = $youtube->videos->listVideos("snippet", [
+            'id' => $reference
+        ]);
+        return $videos[0]->snippet->thumbnails->default->url;
     }
 
     function set_rating($rate) {
@@ -134,5 +152,4 @@ class VideoModel {
         $sql = "INSERT INTO ratings (videos_id, rate, user_id) VALUES (?,?,?)";
         $db->query($sql, [$this->id, $rate, $user_id]);
     }
-
 }
